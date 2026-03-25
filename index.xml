@@ -9,10 +9,17 @@
       <url>https://mhvwerts.github.io/images/papermod-cover.png</url>
       <link>https://mhvwerts.github.io/images/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.148.2</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 21 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2026 21:46:31 +0100</lastBuildDate>
     <atom:link href="https://mhvwerts.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Modern Canon for Scientific Computing with Python: The Essential Libraries Every Scientist Should Know</title>
+      <link>https://mhvwerts.github.io/posts/python-canon/</link>
+      <pubDate>Mon, 23 Mar 2026 21:46:31 +0100</pubDate>
+      <guid>https://mhvwerts.github.io/posts/python-canon/</guid>
+      <description>A list of essential Python libraries used in our research work.</description>
+    </item>
     <item>
       <title>Publications</title>
       <link>https://mhvwerts.github.io/publications/</link>

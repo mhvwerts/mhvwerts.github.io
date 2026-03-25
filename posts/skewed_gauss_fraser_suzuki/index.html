@@ -10,7 +10,7 @@
 <meta name="description" content="Python implementation of the Fraser-Suzuki skewed Gaussian function">
 <meta name="author" content="mhvwerts">
 <link rel="canonical" href="https://mhvwerts.github.io/posts/skewed_gauss_fraser_suzuki/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.2211ca3164be7830024f6aad2b3a2e520843a64f8f048445c3401c1249aa051d.css" integrity="sha256-IhHKMWS&#43;eDACT2qtKzouUghDpk&#43;PBIRFw0AcEkmqBR0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mhvwerts.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mhvwerts.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mhvwerts.github.io/favicon-32x32.png">
@@ -73,8 +73,8 @@
   "keywords": [
     
   ],
-  "articleBody": "The Fraser-Suzuki ‘skewed Gaussian’ function (Fraser \u0026 Suzuki, Anal. Chem. 1969, 41, 37; Rusch \u0026 Lelieur, Anal. Chem. 1973, 45, 1541) is sometimes used to describe the shapes of optical spectra, or chromatographic line shapes. It can be written in the following form.\nfFS(x)={Aexp⁡[−ln⁡2b2{ln⁡(1+2b(x−x0)w)}2]b≠0,2b(x−x0)w\u003e−10b≠0,2b(x−x0)w≤−1Aexp⁡[−4ln⁡2(x−x0)2w2]b=0f_{\\rm FS}(x) = \\begin{cases} {A \\exp \\left [ \\frac{-\\ln 2}{b^2} \\left \\lbrace \\ln \\left ( 1 + \\frac{2b(x-x_0)}{w} \\right ) \\right \\rbrace ^2 \\right ] } \u0026 b \\neq 0, {\\frac{2b(x-x_0)}{w} \u003e -1} \\\\ 0 \u0026 b \\neq 0, {\\frac{2b(x-x_0)}{w} \\leq -1} \\\\ {A \\exp \\left [ -4 \\ln 2 \\frac{(x-x_0)^2}{w^2} \\right ]} \u0026b = 0 \\end{cases} Here, the function is defined piecewice, since the analytical function in the first line of the definition does not exist for all xx , nor for b=0b = 0 . Unfortunately, this cannot be fixed. (BTW, it appears, from limited numerical tests, that our piece-wisely defined skewed Gaussian (cases b≠0b \\neq 0 ) is continuous and differentiable in xx everywhere.)\nBelow, I give a Python/numpy implementation of this function. It is ‘vectorised’, i.e. it handles numpy vectors for high-speed computation, but can also handle individual floats as an argument. The skewed Gaussian is parametrised by AA (the height of the peak), x0x_0 (the position of the peak), ww (proportional to the width of the peak) and bb (the ‘skewness’, or asymmetry). It handles the case where the analytical function vanishes (where the argument of the logarithm ceases to be positive). It also handles the case b=0b =0 , by switching to the symmetric Gaussian below a certain threshold value of bb (where bb will considered to be ‘close’ to zero).\nThis implementation seems to be robust and works for our practical applications, but it may certainly be improved upon. Comments and suggestions are welcome\nimport numpy as np def _skew_gauss_vec(x, A, x0, w, b): \"\"\"vectorised version of skewed Gaussian, called by skew_gauss\"\"\" ndeps = np.finfo(x.dtype.type).eps lim0 = 2.*np.sqrt(ndeps) # Through experimentation I found 2*sqrt(machine_epsilon) to be # a good safe threshold for switching to the b=0 limit # at lower thresholds, numerical rounding errors appear if (abs(b) \u003c= lim0): sg = A * np.exp(-4*np.log(2)*(x-x0)**2/w**2) else: lnterm = 1.0 + ((2*b*(x-x0))/w) sg = np.zeros_like(lnterm) sg[lnterm\u003e0] =\\ A * np.exp(-np.log(2)*(np.log(lnterm[lnterm\u003e0])/b)**2) return sg def skew_gauss(x, A, x0, w, b): \"\"\"Fraser-Suzuki skewed Gaussian. A: peak height, x0: peak position, w: width, b: skewness\"\"\" if type(x)==np.ndarray: sg = _skew_gauss_vec(x, A, x0, w, b) else: x = float(x) ndeps = np.finfo(type(x)).eps lim0 = 2.*np.sqrt(ndeps) if (abs(b) \u003c= lim0): sg = A * np.exp(-4*np.log(2)*(x-x0)**2/w**2) else: lnterm = 1.0 + ((2*b*(x-x0))/w) if (lnterm\u003e0): sg = A * np.exp(-np.log(2)*(np.log(lnterm)/b)**2) else: sg = 0 return sg ",
-  "wordCount" : "436",
+  "articleBody": "The Fraser-Suzuki ‘skewed Gaussian’ function (Fraser \u0026 Suzuki, Anal. Chem. 1969, 41, 37; Rusch \u0026 Lelieur, Anal. Chem. 1973, 45, 1541) is sometimes used to describe the shapes of optical spectra, or chromatographic line shapes. It can be written in the following form.\nfFS(x)={Aexp⁡[−ln⁡2b2{ln⁡(1+2b(x−x0)w)}2]b≠0,2b(x−x0)w\u003e−10b≠0,2b(x−x0)w≤−1Aexp⁡[−4ln⁡2(x−x0)2w2]b=0f_{\\rm FS}(x) = \\begin{cases} {A \\exp \\left [ \\frac{-\\ln 2}{b^2} \\left \\lbrace \\ln \\left ( 1 + \\frac{2b(x-x_0)}{w} \\right ) \\right \\rbrace ^2 \\right ] } \u0026 b \\neq 0, {\\frac{2b(x-x_0)}{w} \u003e -1} \\\\ 0 \u0026 b \\neq 0, {\\frac{2b(x-x_0)}{w} \\leq -1} \\\\ {A \\exp \\left [ -4 \\ln 2 \\frac{(x-x_0)^2}{w^2} \\right ]} \u0026b = 0 \\end{cases} Here, the function is defined piecewice, since the analytical function in the first line of the definition does not exist for all xx , nor for b=0b = 0 . Unfortunately, this cannot be fixed. (BTW, it appears, from limited numerical tests, that our piece-wisely defined skewed Gaussian (cases b≠0b \\neq 0 ) is continuous and differentiable in xx everywhere.)\nThe full width at half maximum (FWHM) of the Fraser-Suzuki skewed Gaussian is given by\nFWHM=wsinh⁡(b)b\\textrm{FWHM} = w \\frac{\\sinh(b)}{b} Below, I give a Python/numpy implementation of this function. It is ‘vectorised’, i.e. it handles numpy vectors for high-speed computation, but can also handle individual floats as an argument. The skewed Gaussian is parametrised by AA (the height of the peak), x0x_0 (the position of the peak), ww (proportional to the width of the peak) and bb (the ‘skewness’, or asymmetry). It handles the case where the analytical function vanishes (where the argument of the logarithm ceases to be positive). It also handles the case b=0b =0 , by switching to the symmetric Gaussian below a certain threshold value of bb (where bb will considered to be ‘close’ to zero).\nThis implementation seems to be robust and works for our practical applications, but it may certainly be improved upon. Comments and suggestions are welcome\nimport numpy as np def _skew_gauss_vec(x, A, x0, w, b): \"\"\"vectorised version of skewed Gaussian, called by skew_gauss\"\"\" ndeps = np.finfo(x.dtype.type).eps lim0 = 2.*np.sqrt(ndeps) # Through experimentation I found 2*sqrt(machine_epsilon) to be # a good safe threshold for switching to the b=0 limit # at lower thresholds, numerical rounding errors appear if (abs(b) \u003c= lim0): sg = A * np.exp(-4*np.log(2)*(x-x0)**2/w**2) else: lnterm = 1.0 + ((2*b*(x-x0))/w) sg = np.zeros_like(lnterm) sg[lnterm\u003e0] =\\ A * np.exp(-np.log(2)*(np.log(lnterm[lnterm\u003e0])/b)**2) return sg def skew_gauss(x, A, x0, w, b): \"\"\"Fraser-Suzuki skewed Gaussian. A: peak height, x0: peak position, w: width, b: skewness\"\"\" if type(x)==np.ndarray: sg = _skew_gauss_vec(x, A, x0, w, b) else: x = float(x) ndeps = np.finfo(type(x)).eps lim0 = 2.*np.sqrt(ndeps) if (abs(b) \u003c= lim0): sg = A * np.exp(-4*np.log(2)*(x-x0)**2/w**2) else: lnterm = 1.0 + ((2*b*(x-x0))/w) if (lnterm\u003e0): sg = A * np.exp(-np.log(2)*(np.log(lnterm)/b)**2) else: sg = 0 return sg ",
+  "wordCount" : "455",
   "inLanguage": "en",
   "image": "https://mhvwerts.github.io/images/papermod-cover.png","datePublished": "2016-10-02T20:55:48+02:00",
   "dateModified": "2016-10-02T20:55:48+02:00",
@@ -98,10 +98,10 @@
 </script>
 </head>
 
-<body class="" id="top">
+<body class=" dark" id="top">
 <script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
     }
 
 </script>
@@ -185,6 +185,9 @@
 . Unfortunately, this cannot be fixed. (BTW, it appears, from limited numerical tests, that our piece-wisely defined skewed Gaussian (cases <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo mathvariant="normal">≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">b \neq 0</annotation></semantics></math></span>
 ) is continuous and differentiable in <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span>
  everywhere.)</p>
+<p>The full width at half maximum (FWHM) of the Fraser-Suzuki skewed Gaussian is given by</p>
+<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>FWHM</mtext><mo>=</mo><mi>w</mi><mfrac><mrow><mi>sinh</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>b</mi></mfrac></mrow><annotation encoding="application/x-tex">\textrm{FWHM} = w \frac{\sinh(b)}{b}</annotation></semantics></math></span>
+
 <p>Below, I give a Python/numpy implementation of this function. It is &lsquo;vectorised&rsquo;, i.e. it handles numpy vectors for high-speed computation, but can also handle individual floats as an argument. The skewed Gaussian is parametrised by <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span>
  (the height of the peak), <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">x_0</annotation></semantics></math></span>
  (the position of the peak), <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span>
@@ -315,7 +318,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://mhvwerts.github.io/">Homepage of Martinus Werts</a></span> · 
+        <span>&copy; 2026 <a href="https://mhvwerts.github.io/">Homepage of Martinus Werts</a></span> · 
 
     <span>
         Powered by

@@ -10,7 +10,7 @@
 <meta name="description" content="A list of essential Python libraries used in our research work.">
 <meta name="author" content="mhvwerts">
 <link rel="canonical" href="https://mhvwerts.github.io/posts/python-canon/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.2211ca3164be7830024f6aad2b3a2e520843a64f8f048445c3401c1249aa051d.css" integrity="sha256-IhHKMWS&#43;eDACT2qtKzouUghDpk&#43;PBIRFw0AcEkmqBR0=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.aeb04085357f24835232aa89766467110fb6da019fa0a790d4d097b3949d7276.css" integrity="sha256-rrBAhTV/JINSMqqJdmRnEQ&#43;22gGfoKeQ1NCXs5SdcnY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mhvwerts.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mhvwerts.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mhvwerts.github.io/favicon-32x32.png">
@@ -31,7 +31,7 @@
   <meta property="og:site_name" content="Homepage of Martinus Werts">
   <meta property="og:title" content="A Modern Canon for Scientific Computing with Python: The Essential Libraries Every Scientist Should Know">
   <meta property="og:description" content="A list of essential Python libraries used in our research work.">
-  <meta property="og:locale" content="en">
+  <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-03-23T21:46:31+01:00">
@@ -73,8 +73,8 @@
   "keywords": [
     
   ],
-  "articleBody": "There is something about initial caps that makes a title look all knowledgeable and authoritative. However, some modesty is in place when writing this post about scientific computing with Python, which is more about making a list of essential libraries for use in our research group.\nIn compiling this list, I hope to create some rest in face of the ever evolving scientific Python ecosystem, so that students will know what to use. Where possible, data analysis scripts in our research should rely solely on libraries from this canon.\nThe criteria for designing this list. The list should\ncontain a limited number of libraries form a complete toolset for chemists and physicists doing spectroscopy The criteria for the included libraries. These should\nbe easy to install be well-maintained with an active and viable community be considered de facto standards for their specific use cases play well with the other libraries The list numpy scipy matplotlib xarray h5py lmfit pillow tifffile tqdm pyserial spyder jupyterlab True, Spyder and JupyterLab are not Python libraries, but they are our essential tools for interacting with Python, and can be included in the installation of a conda environment.\nOther libraries worth considering The following libraries are more specialized but can be very powerful in the thing they do.\nxarray-lmfit pyMCR spectrochempy coolprop pyfvtool remi nicegui marimo UltraPlot ",
-  "wordCount" : "222",
+  "articleBody": "There is something about initial caps that makes a title look all knowledgeable and authoritative. However, some modesty is in place when writing this post about scientific computing with Python, which is more about making a list of essential libraries for use in our research group.\nIn compiling this list, I hope to create some rest in face of the ever evolving scientific Python ecosystem, so that students will know what to use. Where possible, data analysis scripts in our research should rely solely on libraries from this canon.\nThe criteria for designing this list. The list should\ncontain a limited number of libraries form a complete toolset for chemists and physicists doing spectroscopy The criteria for the included libraries. These should\nbe easy to install be well-maintained with an active and viable community be considered de facto standards for their specific use cases play well with the other libraries The list numpy scipy matplotlib xarray h5py h5netcdf lmfit pillow tifffile tqdm pyserial spyder jupyterlab True, Spyder and JupyterLab are not Python libraries, but they are our essential tools for interacting with Python, and can be included in the installation of a conda environment.\nOther libraries worth considering The following libraries are more specialized but can be very powerful in the thing they do.\nxarray-lmfit pyMCR spectrochempy coolprop pyfvtool remi nicegui marimo UltraPlot Python version 3.12 We make a very conservative choice for the Python version, taking a version that has passed its ‘bugfix’ period, but which is still maintained in terms of ‘security’ updates. Then, we stick with this version as long as possible. The lag in adoption of a more recent Python version provides time for all packages on which we depend to transition to the new Python version. In the scientific Python eco-system, this updating takes time.\nThe current status of Python versions can be viewed here.\nHence, we are currently on Python 3.12, and will remain on 3.12 until October 2028. Then, we should switch to Python 3.15. If, for some reason, we need to be more modern about it, we could switch to 3.14 in October 2027. There is still time!\n",
+  "wordCount" : "356",
   "inLanguage": "en",
   "image": "https://mhvwerts.github.io/images/papermod-cover.png","datePublished": "2026-03-23T21:46:31+01:00",
   "dateModified": "2026-03-23T21:46:31+01:00",
@@ -178,7 +178,9 @@
                 <li>
                     <a href="#the-list" aria-label="The list">The list</a></li>
                 <li>
-                    <a href="#other-libraries-worth-considering" aria-label="Other libraries worth considering">Other libraries worth considering</a>
+                    <a href="#other-libraries-worth-considering" aria-label="Other libraries worth considering">Other libraries worth considering</a></li>
+                <li>
+                    <a href="#python-version-312" aria-label="Python version 3.12">Python version 3.12</a>
                 </li>
             </ul>
         </div>
@@ -206,6 +208,7 @@
 <li>matplotlib</li>
 <li>xarray</li>
 <li>h5py</li>
+<li>h5netcdf</li>
 <li>lmfit</li>
 <li>pillow</li>
 <li>tifffile</li>
@@ -228,6 +231,10 @@
 <li>marimo</li>
 <li>UltraPlot</li>
 </ol>
+<h2 id="python-version-312">Python version 3.12<a hidden class="anchor" aria-hidden="true" href="#python-version-312">#</a></h2>
+<p>We make a very conservative choice for the Python version, taking a version that has passed its &lsquo;bugfix&rsquo; period, but which is still maintained in terms of &lsquo;security&rsquo; updates. Then, we stick with this version as long as possible. The lag in adoption of a more recent Python version provides time for all packages on which we depend to transition to the new Python version. In the scientific Python eco-system, this updating takes time.</p>
+<p>The current status of Python versions can be viewed <a href="https://devguide.python.org/versions/">here</a>.</p>
+<p>Hence, we are currently on <strong>Python 3.12</strong>, and will remain on 3.12 <strong>until October 2028</strong>. Then, we should switch to Python 3.15. If, for some reason, we need to be more modern about it, we could switch to 3.14 in October 2027. There is still time!</p>
 
 
   </div>
